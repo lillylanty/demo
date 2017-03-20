@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0,
+     minimum-scale=1.0,user-scalable=no"/>
+    <meta name="apple-touch-fullscreen" content="YES"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>我的滑动组件开发</title>
+    <style>
+        body{
+            margin:0;
+            padding:0;
+            background:#333;
+            overflow:hidden;
+
+        }
+        #canvas{
+            height:100%;
+            width:100%;
+            overflow:hidden;
+        }
+        ul,li{
+            padding:0;
+            margin:0;
+            list-style: none;
+            overflow: hidden;
+            width:100%;
+            height:100%;
+        }
+        li{
+            /*方式1*/
+            /*line-height: 568px;*/
+            /*vertical-align: middle;*/
+        /*室图片上下居中3*/
+            /*display:table-cell;*/
+            /*vertical-align:middle;*/
+            /*方式3*/
+            position:absolute;
+            display:-webkit-box;
+            -webkit-box-pack:center;
+            -webkit-box-align:center;
+        }
+    </style>
+</head>
+<body>
+    <div id="canvas">
+        <!--<img src="res/qy-img/14bg.jpg" alt=""/>-->
+    </div>
+    <script>
+        var list=[
+            {height:500,width:750,img:"res/qy-img/14bg.jpg"},
+            {height:600,width:400,img:"res/qy-img/12bg.jpg"},
+            {height:4930,wdth:750,img:"res/qy-img/13bg.jpg"},
+            {height:4930,wdth:750,img:"res/qy-img/11bg.jpg"}
+        ];
+        var dom = document.getElementById('canvas');
+        function Slider(opts){
+            this.wrap =opts.dom;
+            this.list =opts.list;  //array[object,object,object]
+            //初始化，赋值等准备
+            this.init();
+            this.randerDom();
+            this.bindDom();
+
+            }
+        Slider.prototype.init = function(){
+            this.radio = window.innerHeight/window.innerWidth;//窗口的长宽比
+            this.scaleW = window.innerWidth;//图片的滚动的距离就是屏幕的宽度
+            this.idx= 0;//图片索引
+            // console.log(this.radio+"图片滚动距离"+this.scaleW);
+//            this.randerDom();
+//            this.bindDom();
+//            this.go();
+
+        };
+        //生成的dom碎片及图片列表
+        Slider.prototype.randerDom = function(){ // console.log(this);
+            var wrap =this.wrap;
+            var data = this.list;
+            var len = data.length;   //console.log(len);
+            var scale =this.scaleW;
+            this.outer = document.createElement('ul');
+            for(var i=0;i<len;i++){
+                var li =document.createElement('li');
+                var item = data[i]; //console.log(item['img']);
+                li.style.width =scale +'px';
+                li.style.webkitTransform ='transform(translate3d('+i*scale+'px,0,))';
+                if(item){
+                    if(item['height']/item['width']==this.radio){
+                        li.innerHTML = '<img height="'+window.innerHeight+'" src="'+item['img']+'"/>';
+                    }else{
+                        li.innerHTML = '<img width="'+window.innerWidth+'" src="'+item['img']+'"/> ';
+                    }
+                }
+                li.style.webkitTransform = 'translate3d('+i*scale+',0,0)';
+                this.outer.appendChild(li);
+            }
+            wrap.style.height = window.innerHeight+'px';
+            wrap.appendChild(this.outer); //console.log(this.outer);
+        };
+        // 把碎片插入到html中
+        Slider.prototype.bindDom= function(){
+            var self =this; //console.log(this);
+            var scale= self.scaleW; // console.log(scale);
+            var outer =self.outer;
+            var len= self.list.length;
+
+            var startHandle = function(evt){
+                self.startX= evt.touches[0].pageX;
+                //console.log(evt.touches[0].pageX);
+                self.offsetX = 0;
+                self.startTime = new Date()*1;
+                //console.log(self.startTime);
+            };
+            var moveHandle = function(evt){
+                evt.preventDefault();
+                console.log(self);
+                console.log(evt.targetTouches);
+                //console.log(self.idx);
+                self.offsetX = evt.touches[0].pageX -self.startX;
+                //console.log(self.offsetX);
+                var lis = outer.getElementsByTagName('li');
+                var i =self.idx -1;  // console.log(self.idx);
+                var m = i+3;
+                for(i;i<m;i++){
+                    lis[i]&&(lis[i].style.webkitTransform ='translate3d('+((i-self.idx)*scale+self.offsetX)+'px,0,0)')
+                }
+            };
+            var endHandle = function(evt){
+                var boundary = scale/6;
+                var endTime = new Date()*1;
+                var lis =outer.getElementsByTagName('li');
+                if(endTime-self.startTime>800) {
+                    if (self.offsetX >= boundary) {
+                        //上一页
+                        self.go('-1');
+                    } else if (self.offsetX < boundary) {
+                        //下一页
+                        self.go('1');
+
+                    } else {
+                        //留在本页
+                        self.go('0');
+
+                    }
+                }else{
+                    if(self.offsetX>50){
+                        self.go('-1');
+                    }else if(self.offsetX<-50){
+                        self.go('1');
+                    }else{
+                        self.go('0');
+                    }
+                }
+
+            };
+
+            outer.addEventListener('touchstart',startHandle);
+            outer.addEventListener('touchmove',moveHandle);
+            outer.addEventListener('touchend',endHandle);
+        };
+        Slider.prototype.go = function(n){ console.log(n);
+            var idx = this.idx;
+            var cidx;
+            var lis =this.outer.getElementsByTagName('li');
+            var len = lis.length;
+            var scale =this.scaleW;
+
+            if(typeof n == 'number'){
+                cidx = idx;
+            }else if(typeof n =='string'){
+                cidx = idx+n*1;
+            }
+            //索引超出
+            if(cidx >len-1){
+                cidx =len-1;
+            }else if(cidx <0){
+                cidx=0;
+            }
+            this.idx =cidx;
+            lis[cidx].style.webkitTransition ='-webkitTransform 0.2s ease-out';
+            lis[cidx]&& (lis[cidx].style.webkitTransform ='translate3d(0,0,0)');
+            lis[cidx-1]&& (lis[cidx-1].style.webkitTransform ='translate3d(-'+scale+'px,0,0)');
+            lis[cidx+1]&& (lis[cidx+1].style.webkitTransform ='translate3d('+scale+'px,0,0)');
+        }
+        var ss= new Slider({'dom':dom,'list':list});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+     //   ss.init();
+//       Slider.prototype.init = function(){
+//            this.radio = window.innerHeight/window.innerWidth;//窗口的长宽比
+//            this.scaleW = window.innerWidth;//图片的滚动的距离就是屏幕的宽度
+//            this.idx= 0;//图片索引
+//        };
+//        Slider.prototype.randerDom = function(){
+//            var wrap =this.wrap;
+//            var data = this.list;
+//            var len = data.length;
+//            var scale =this.scaleW;
+//            this.outer = document.createElement('ul');
+//
+//            for(var i=0;i<len;i++){
+//                var li =document.createElement('li');
+//                var item = data[i];
+//
+//                li.style.width =scale +'px';
+//                li.style.webkitTransform ='transform(translate3d('+i*scale+'px,0,))';
+//                if(item){
+//                    if(item['height']/item['width']==this.radio){
+//                        li.innerHTML = '<img height="'+window.innerHeight+'" src="'+item['img']+'"/> ';
+//                    }else{
+//                        li.innerHTML = '<img width="'+window.innerWidth+'" src="'+item['iimg']+'"/> ';
+//                    }
+//                }
+//                li.style.webkitTransform = 'translate3d('+i*scale+',0,0)';
+//                this.outer.appendChild(li);
+//            }
+//            wrap.style.height = window.innerHeight+'px';
+//            wrap.appendChild(this.outer);
+//        };
+//        Slider.prototype.bindDom = function(){
+//            var self =this;
+//            var scale= self.scaleW;
+//            var outer =self.outer;
+//            var len= self.list.legnth;
+//
+//            var startHandle = function(evt){
+//                self.startX= evt.touches[0].pageX;
+//
+//                self.offsetX = 0;
+//
+//                self.startTime = new Date()*1;
+//            };
+//            var moveHandle = function(evt){
+//                evt.preventDefault();
+//                self.offsetX = evt.touches[0].pageX -self.startX;
+//                console.log(self.offsetX);
+//                var lis = outer.getElementsByTagName('li');
+//                var i =self.idx -1;
+//                var m = i+3;
+//                for(i;i<m;i++){
+//                    lis[i]&&(lis[i].style.webkitTransform ='translate3d('+((i-self.idx)*scale+self.offsetX)+',0,0)')
+//                }
+//            };
+//            var endHandle = function(evt){
+//                var boundary = scale/6;
+//                var endTime = new Date()*1;
+//                var lis =outer.getElementsByTagName('li');
+//                if(self.offsetX >=boundary){
+//                    //上一页
+//                    self.go('-1');
+//                }else if(self.offsetX < boundary){
+//                    //下一页
+//                    self.go('1');
+//
+//                }else{
+//                    //留在本页
+//                    self.go('0');
+//
+//                }
+//            };
+//            outer.addEventListener('touchstart',startHandle);
+//            outer.addEventListener('touch',moveHandle);
+//
+//        };
+//        Slider.prototype.go = function(n){
+//            var idx = this.idx;
+//            var cidx;
+//            var lis =this.outer.getElementsByTagName('li');
+//            var len = lis.length;
+//
+//            if(typeof n == 'number'){
+//                cidx = idx;
+//            }else if(typeof n =='string'){
+//                cidx = idx+n*1;
+//            }
+//            //索引超出
+//            if(cidx >len-1){
+//                cidx =len-1;
+//            }else if(cidx <0){
+//                cidx=0;
+//            }
+//            this.idx =cidx;
+//            lis[cidx].style.webkitTransform ='translate3d(0,0,0)';
+//            lis[cidx-1].style.webkitTransform ='translate3d(-'+scale+'px,0,0)';
+//            lis[cidx+1].style.webkitTransform ='translate3d('+scale+'px,0,0)';
+//        };
+
+    </script>
+</body>
+</html>
