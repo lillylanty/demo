@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <script src="js/jquery-1.12.4.js"></script>
+    <title></title>
+    <style>
+    .cont{
+        width:60%;
+        display:flex;
+        flex-wrap: wrap;
+        /*justify-content:center;*/
+        /*justify-content: space-around;*/
+        /*justify-content: space-between;*/
+        border:1px solid #aaf;
+    }
+    .item{
+        -webkit-box-flex:1;
+        border:1px solid #c0c;
+        margin-left:5em;
+        margin-bottom:5em;
+    }
+    /*.item:nth-child(1),.item:nth-child(4){*/
+        /*margin-left: 0;*/
+    /*}*/
+    .item a{
+        display:block;
+        width:8em;
+        height:8em;
+        position:relative;
+    }
+    .item>a>img{
+        width:100%;
+        height:100%;
+    }
+       .bigpic{
+            /*position:absolute;*/
+            width:300px;height:300px;
+        }
+    </style>
+</head>
+<body>
+<div class="cont">
+    <div class="item">
+        <a class="tooltip" href="img/beauty/1.jpg" title="这是提示1" >
+            <img src="img/img/1bg.jpg" alt=""/>
+        </a>
+    </div>
+    <div class="item">
+        <a class="tooltip" href="img/beauty/2.jpg" title="这是提示2" >
+            <img src="img/img/2bg.jpg" alt=""/>
+        </a>
+    </div>
+    <div class="item">
+        <a class="tooltip"  href="img/beauty/3.jpg" title="这是提示3" >
+            <img src="img/img/3bg.jpg" alt=""/>
+        </a>
+    </div>
+    <div class="item">
+        <a class="tooltip"  href="img/beauty/4.jpg" title="这是提示4" >
+            <img src="img/img/1bg.jpg" alt=""/>
+        </a>
+    </div>
+    <div class="item">
+        <a class="tooltip"  href="img/beauty/5.jpg" title="这是提示4" >
+            <img src="img/img/2bg.jpg" alt=""/>
+        </a>
+    </div>
+    <div class="item">
+        <a class="tooltip" href="img/beauty/9.jpg" title="这是提示4" >
+            <img src="img/img/1bg.jpg" alt=""/>
+        </a>
+    </div>
+</div>
+<script>
+$("a.tooltip").mouseenter(function(e){
+    this.src= this.href;   var $hr =$(this).attr("href");console.log($hr);
+    this.title="";
+    var tooltip ="<div id='tooltip'><img class='bigpic' src="+this.src+"></div>";
+    $(this).parent().parent().append(tooltip);
+    $("#tooltip").css({
+        "position":"absolute",
+        "top": (e.pageY) +'px',
+        "left": (e.pageX) + 'px'
+    }).show();          //设置x,y坐标
+}).mouseleave(function(){
+    $("#tooltip").remove();
+}).mousemove(function(e){
+    this.href =this.src;
+    $("#tooltip").css({
+        "position":"absolute",
+        "top": (e.pageY+20) +'px',
+        "left": (e.pageX+30) + 'px',
+        "zIndex":100
+    });
+})
+
+
+
+</script>
+</body>
+</html>
