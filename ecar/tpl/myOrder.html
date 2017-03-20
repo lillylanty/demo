@@ -1,0 +1,22 @@
+
+<div ng-include="'tpl/include/header.html'"></div>
+<ion-content class="has-header has-footer">
+  <h2 class="text-center">我的订单</h2>
+  <div class="row">
+    <div class="col col-10">编号</div>
+    <div class="col col-30">菜品</div>
+    <div class="col col-30">下单时间</div>
+    <div class="col col-30">联系人</div>
+  </div>
+  <div class="row" ng-repeat="dish in dishList">
+    <div class="col col-10 col-center">{{dish.oid}}</div>
+    <div class="col col-30 ">
+      <a href="#/detail/{{dish.did}}">
+        <img ng-src="img/{{dish.img_sm}}" class="img-responisve" alt=""/>
+      </a>
+    </div>
+    <div class="col col-30 col-center">{{dish.order_time|date:'yyyy-MM-dd'}}</div>
+    <div class="col col-30 col-center">{{dish.user_name}}</div>
+  </div>
+</ion-content>
+<div ng-include="'tpl/include/footer.html'"></div>

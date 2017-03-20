@@ -1,0 +1,251 @@
+
+<div ng-include="'tpl/include/header.html'"></div>
+<!--<ion-header-bar class="header  ">-->
+  <!--<div class="tabs tabs tabs-icon-top balanced-bg">-->
+    <!--<a class="tab-item tabs-background-assertive"><i class="icon ion-qr-scanner"></i>扫一扫</a>-->
+    <!--<a class="tab-item"> <i class="icon ion-reorder"></i></a>-->
+    <!--<a class="tab-item"><i class="icon ion-android-notifications"></i> 通知</a>-->
+  <!--</div>-->
+
+</ion-header-bar>
+
+<ion-content class="has-header has-footer">
+  <div class="list list-inset">
+    <div class="item item-input">
+      <i class="icon ion-search"></i>
+      <input ng-model="inputTxt.kw" type="text" placeholder="找到你最爱的那台车"/>
+    </div>
+  </div>
+
+  <!--四个功能模块-->
+  <div class="row">
+    <div class="col col-25">
+          <div class="text-center">
+            <img src="res/img/car-img/1.2.jpg"  alt=""/>
+            <p  href="#" >我要买车</p>
+          </div>
+    </div>
+    <div class="col col-25">
+          <div class="text-center">
+            <img src="res/img/car-img/1.3.jpg"  alt=""/>
+            <p  href="#" style="font-size: 0.2em;">我要买车</p>
+          </div>
+    </div>
+    <div class="col col-25">
+          <div class="text-center">
+            <img src="res/img/car-img/1.4.jpg"  alt=""/>
+            <p  href="#" style="font-size: 0.2em;">我要买车</p>
+          </div>
+    </div>
+    <div class="col col-25">
+          <div class="text-center">
+            <img src="res/img/car-img/1.5.jpg"  alt=""/>
+            <p  href="#" style="font-size: 0.2em;">我要买车</p>
+          </div>
+    </div>
+  </div>
+
+  <!--分期购车-->
+  <!--<ion-side-menus ng-controller="sideMenuCtrl">-->
+    <!--<ion-side-menu-content>-->
+      <!--<a class="item item-avatar item-icon-right" href="#" ng-click="openRight()">-->
+        <!--<img src="res/img/car-img/1.6.jpg">-->
+        <!--<h2>分期购车</h2>-->
+        <!--<p>用信用钱包，首付方案任你选</p>-->
+        <!--<i class="icon ion-android-arrow-forward icon-right"></i>-->
+      <!--</a>-->
+    <!--</ion-side-menu-content>-->
+
+    <!--<ion-side-menu side="right">-->
+      <!--<button menu-close class="button button-icon-->
+        <!--icon ion-close">close</button>-->
+      <!--<ul class="list">-->
+        <!--<li class="item list-item">11</li>-->
+        <!--<li class="item list-item">11</li>-->
+        <!--<li class="item list-item">11</li>-->
+        <!--<li class="item list-item">11</li>-->
+      <!--</ul>-->
+    <!--</ion-side-menu>-->
+
+  <!--</ion-side-menus>-->
+  <div class="list">
+
+    <a class="item item-avatar item-icon-right"  ng-click="jump('detail')">
+      <img src="res/img/car-img/1.6.jpg">
+      <h2>分期购车</h2>
+      <p>用信用钱包，首付方案任你选</p>
+      <i class="icon ion-android-arrow-forward icon-right"></i>
+    </a>
+  </div>
+
+  <!--一手好车-->
+  <div class="list">
+    <div class="item item-icon-right">
+      <p> 一手好车</p> <a href="#" class="badge" ng-click="jump('detail')">更多</a>
+      <i class="icon ion-ios-arrow-right"></i>
+    </div>
+    <div class="item">
+      <ion-slide-box active-slide="myActiveSlide" show-pager=false>
+        <ion-slide>
+          <div class="box blue">
+            <div class="row">
+              <div class="col col-50">
+                <div class="list card">
+                  <div class="item item-body">
+                    <img class="full-image" ng-src="res/img/car-img/{{carList[5].img_sm}}">
+                    <h3>{{carList[5].name}}}</h3>
+                    <p>2015年11月/2.00万公里</p>
+                    <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                    <p>
+                      <a href="#" class="subdued">{{carList[5].price}}</a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col col-50">
+                <div class="list card">
+                  <div class="item item-body">
+                    <img class="full-image" ng-src="res/img/car-img/{{carList[5].img_sm}}">
+                    <h3>{{carList[5].name}}</h3>
+                    <p>2015年11月/2.00万公里</p>
+                    <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                    <p>
+                      <a href="#" class="subdued">{{carList[5].price}}</a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box yellow">
+            <div class="row">
+              <div class="col col-50">
+                <div class="list card">
+                  <div class="item item-body">
+                    <img class="full-image" ng-src="res/img/car-img/{{carList[3].img_sm}}">
+                    <h3>{{carList[3].name}}</h3>
+                    <p>2015年11月/2.00万公里</p>
+                    <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                    <p>
+                      <a href="#" class="subdued">{{carList[3].price}}</a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col col-50">
+                <div class="list card">
+                  <div class="item item-body">
+                    <img class="full-image" ng-src="res/img/car-img/{{carList[0].img_sm}}">
+                    <h3>{{carList[0].name}}</h3>
+                    <p>2015年11月/2.00万公里</p>
+                    <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                    <p>
+                      <a href="#" class="subdued">{{carList[0].price}}</a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="box pink">
+            <div class="row">
+              <div class="col col-50">
+                <div class="list card">
+                  <div class="item item-body">
+                    <img class="full-image" src="res/img/car-img/1.4.jpg">
+                    <h3>江淮·瑞风M3 2015款 16L 豪华型</h3>
+                    <p>2015年11月/2.00万公里</p>
+                    <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                    <p>
+                      <a href="#" class="subdued">10.80万</a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+              <div class="col col-50">
+                <div class="list card">
+                  <div class="item item-body">
+                    <img class="full-image" src="res/img/car-img/1.4.jpg">
+                    <h3>江淮·瑞风M3 2015款 16L 豪华型</h3>
+                    <p>2015年11月/2.00万公里</p>
+                    <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                    <p>
+                      <a href="#" class="subdued">10.80万</a>
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </ion-slide>
+      </ion-slide-box>
+
+
+    </div>
+
+  </div>
+  <!--hot车-->
+  <div class="row">
+    <div class="col col-40">
+      <p class="assertive">hot</p>
+      <div class="text-center">
+        <p class="assertive">准新车</p>
+        <p>15个月2万公里</p>
+        <img src="res/img/car-img/1.1.jpg" alt=""/>
+      </div>
+    </div>
+    <div class="col col-60">
+      <div class="row">
+        <div class="col col-50">
+          <h4>新上车源</h4>
+          <p>上架2天内</p>
+        </div>
+        <div class="col col-50">
+          <img src="res/img/car-img/1.2.jpg" alt=""/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col col-50">
+          <h4>新上车源</h4>
+          <p>上架2天内</p>
+        </div>
+        <div class="col col-50">
+          <img src="res/img/car-img/1.3.jpg" alt=""/>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  
+  
+  
+  <!-- -->
+  <!--<div class="list list-inset">-->
+    <!--<a class="item item-thumbnail-left"-->
+       <!--ui-sref="detail({id:dish.did})" ng-repeat="dish in dishList">-->
+      <!--<img ng-src="img/{{dish.img_sm}}" alt=""/>-->
+      <!--<h2>{{dish.name}}</h2>-->
+      <!--<p>{{dish.material}}</p>-->
+      <!--<p>{{dish.price|currency:'￥'}}</p>-->
+    <!--</a>-->
+  <!--</div>-->
+  <!--<ion-infinite-scroll on-infinite="loadMore()" ng-show="hasMore"></ion-infinite-scroll>-->
+  <!--&lt;!&ndash;<button class="button button-block button-balanced" ng-click="loadMore()" ng-show="hasMore">加载更多</button>&ndash;&gt;-->
+  <!--<p ng-hide="hasMore" class="text-center assertive" >没有更多数据</p><br/>-->
+
+</ion-content>
+
+<div ng-include="'tpl/include/footer.html'"></div>
+
+

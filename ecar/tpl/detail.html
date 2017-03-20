@@ -1,0 +1,187 @@
+<!--<div ng-include="'tpl/include/header.html'"></div>-->
+<ion-header-bar>
+  <div class="tabs assertive-bg">
+    <a class="tab-item tabs-background-assertive"><i class="ion ion-android-locate"></i>全国</a>
+    <a class="tab-item"><input type="text" placeholder="搜索车辆、店铺"/></a>
+    <a class="tab-item"><i class="ion ion-android-menu"></i></a>
+  </div>
+</ion-header-bar>
+
+
+<ion-content class="has-header has-footer">
+  <div class="card">
+    <div class="item item-divider">
+      <div class="row">
+        <div class="col col-25"> <a href="" ng-click="showChoice()">排序 </a> <i class="icon-right ion-ios-arrow-down"></i></div>
+        <div class="col col-25"> <a href="" >品牌  </a> <i class="icon-right ion-ios-arrow-down"></i></div>
+        <div class="col col-25"> <a href="" >价格 </a> <i class="icon-right ion-ios-arrow-down"></i></div>
+        <div class="col col-25"> <button  ng-click="showModal()" >筛选 </button> <i class="icon-right ion-ios-arrow-down"></i></div>
+      </div>
+</div>
+    <!--<ion-refresher on-refresh="doRefresh()"></ion-refresher>-->
+    <ul class=" list">
+      <li class="item" ng-repeat="cardata in dishList">
+        <div class="row">
+          <div class="col col-30 col-center">
+            <a href="#">
+              <img ng-src="res/img/car-img/{{cardata.img_sm}}">
+            </a>
+          </div>
+          <div class="col col-65">
+            <h2>{{cardata.name}}</h2>
+            <p>2016年06月/4.00万公里</p>
+            <div class="row">
+              <div class="col col-25"> <a class="assertive">{{cardata.price}}</a> </div>
+              <div class="col col-offset-20 col-40">  <button class="button button-small button-assertive">里程少</button>
+                <button class="button button-small button-positive button-outline">{{cardata.applyer}}</button> </div>
+            </div>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+      <ion-infinite-scroll
+              ng-show="hasMore"
+              ng-if="moreDataCanBeLoaded()"
+              icon="ion-loading-c"
+              on-infinite="loadMore()">
+      </ion-infinite-scroll>
+
+      <p ng-hide="hasMore" class="text-center assertive" >没有更多数据</p><br/>
+
+    <!--<div class="item item-divider text-right">-->
+      <!--<button class="button button-small button-calm"-->
+              <!--ng-click="jump('order',{id:dish.did})">我要购买-->
+      <!--</button>-->
+      <!--<button class="button button-small button-energized"-->
+              <!--ng-click="jump('main')">我再看看-->
+      <!--</button>-->
+    <!--</div>-->
+    </div>
+    <!--action sheet-->
+    <div ng-click="showChoice()"></div>
+    <button class="button-positive" ion-button icon-only ng-click="showPop()">
+        <ion-icon name="more"></ion-icon>弹出框
+    </button>
+    <button ng-click="openPopover($event)">打开浮动框</button>
+</ion-content>
+<div ng-include="'tpl/include/footer.html'"></div>
+<script id="my-pop.html" type="text/ng-template">
+
+</script>
+<script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view>
+        <ion-content class="padding">
+            <h5>车型</h5>
+            <div class="row bg-row">
+                <div class="col col-33">
+                    <div class="text-center car-style" ng-click="getKeywords()">
+                        <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                        <p>不限</p>
+                    </div>
+                </div>
+                <div class="col col-33">
+                    <div class="text-center car-style" ng-click="getKeywords()">
+                        <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                        <p>轿车</p>
+                    </div>
+                </div>
+                <div class="col col-33">
+                    <div class="text-center car-style" ng-click="getKeywords()">
+                        <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                        <p>SUV</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bg-row">
+                <div class="col col-33">
+                    <div class="text-center car-style" ng-click="getKeywords()">
+                        <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                        <p>MPV</p>
+                    </div>
+                </div>
+                <div class="col col-33">
+                    <div class="text-center car-style" ng-click="getKeywords()">
+                        <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                        <p>跑车</p>
+                    </div>
+                </div>
+                <div class="col col-33">
+                    <div class="text-center car-style" ng-click="getKeywords()">
+                        <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                        <p>商用车</p>
+                    </div>
+                </div>
+            </div>
+            <!--选择城市-->
+            <div class="list list-inset">
+                <a class="item item-icon-right">
+                    <p>选择城市</p>
+                    <span class="badge">全国</span>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </a>
+
+
+            </div>
+            <div class="list">
+                <a class="item item-icon-right">
+                    <p>车源类型</p>
+                    <span class="badge">全部车源</span>
+                    <i class="icon ion-ios-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="list" >
+                <div class="item ">
+                    <p>车龄要求(单位：年)</p>
+                    <div class="range range-positive">
+                        <i class="icon ion-ios-sunny-outline"></i>
+                        <input type="range" name="volume" min="0" max="8" value="4">
+                        <i class="icon ion-ios-sunny"></i>
+                    </div>
+                </div>
+                <div class="item ">
+                    <p>里程要求(单位：万公里)</p>
+                    <div class="range range-positive">
+                        <i class="icon ion-ios-sunny-outline"></i>
+                        <input type="range" name="volume" min="0" max="20" value="10">
+                        <i class="icon ion-ios-sunny"></i>
+                    </div>
+                </div>
+            </div>
+            <!--排放标准-->
+            <div class="list">
+                <div class="item">
+                    <div class="row">
+                        <div class="col col-33">
+                            <div class=" ">不限</div>
+                        </div>
+                        <div class="col col-33">
+                            <div class=" ">国II</div>
+                        </div>
+                        <div class="col col-33">
+                            <div class=" ">国III</div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col col-33">
+                            <div class=" ">国IV</div>
+                        </div>
+                        <div class="col col-33">
+                            <div class=" ">国V</div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-box">
+                <span class=" ">为您找到0辆车</span>
+                <button class="button  button-assertive pull-left" ng-click="createContact(newUser)">查看</button>
+                <button class="button  background-assertive pull-left" ng-click="modal.hide()">重置</button>
+            </div>
+
+        </ion-content>
+    </ion-modal-view>
+</script>

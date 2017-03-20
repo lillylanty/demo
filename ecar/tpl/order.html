@@ -1,0 +1,35 @@
+<div ng-include="'tpl/include/header.html'"></div>
+<ion-content class="has-header has-footer">
+  <div class="list list-inset" ng-hide="succMsg||errMsg">
+    <label class="item item-input">
+      <span class="input-label">名字</span>
+      <input type="text" placeholder="请输入用户名" ng-model="order.user_name"/>
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">联系电话</span>
+      <input type="text" placeholder="请输入您的电话" ng-model="order.phone"/>
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">送餐地址</span>
+      <textarea placeholder="请输入地址" ng-model="order.addr"></textarea>
+    </label>
+
+    <label class="item item-input">
+      <span class="input-label">选择性别</span>
+    </label>
+    <ion-list>
+      <ion-radio value="1" ng-model="order.sex">男</ion-radio>
+      <ion-radio value="2" ng-model="order.sex">女</ion-radio>
+    </ion-list>
+    <button class="button
+     button-block button-balanced"
+            ng-click="sumbmitOrder()">
+      提交订单
+    </button>
+  </div>
+  <p ng-show="succMsg">{{succMsg}}</p>
+  <p ng-show="errMsg">{{errMsg}}</p>
+</ion-content>
+<div ng-include="'tpl/include/footer.html'"></div>

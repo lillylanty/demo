@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html ng-app="kaifanla">
+<head lang="en">
+  <meta charset="UTF-8">
+  <title></title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no"/>
+  <link rel="stylesheet" href="css/ionic.css"/>
+  <link rel="stylesheet" href="css/test.css"/>
+
+  <script src="js/ionic.bundle.js"></script>
+  <script src="app/ecar.js"></script>
+  <style>
+    .slider {
+      height: 300px;
+    }
+    .slider-slide {
+      color: #000;
+      background-color: #fff; text-align: center;
+      font-family: "HelveticaNeue-divght", "Helvetica Neue divght", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; font-weight: 300; }
+    .blue {
+      /*background-color: blue;*/
+    }
+
+    .yellow {
+      /*background-color: yellow;*/
+    }
+
+    .pink {
+      /*background-color: pink;*/
+    }
+    .box{
+      height:100%;
+    }
+    .box h1{
+      position:relative; top:50%; transform:translateY(-50%);
+    }
+  </style>
+</head>
+<body ng-controller="sdivdeCtrl">
+<ion-content>
+  <div class="card">
+      <div class="item">11</div>
+      <div class="item">11</div>
+      <div class="item">
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+          <ion-slide>
+            <div class="box blue">
+              <div class="row">
+                <div class="col col-50">
+                  <div class="list card">
+                    <div class="item item-body">
+                      <img class="full-image" src="res/img/car-img/1.4.jpg">
+                      <h3>江淮·瑞风M3 2015款 16L 豪华型</h3>
+                      <p>2015年11月/2.00万公里</p>
+                      <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                      <p>
+                        <a href="#" class="subdued">10.80万</a>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col col-50">
+                  <div class="list card">
+                    <div class="item item-body">
+                      <img class="full-image" src="res/img/car-img/1.4.jpg">
+                      <h3>江淮·瑞风M3 2015款 16L 豪华型</h3>
+                      <p>2015年11月/2.00万公里</p>
+                      <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                      <p>
+                        <a href="#" class="subdued">10.80万</a>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box yellow">
+              <div class="row">
+                <div class="col col-50">
+                  <div class="list card">
+                    <div class="item item-body">
+                      <img class="full-image" src="res/img/car-img/1.4.jpg">
+                      <h3>江淮·瑞风M3 2015款 16L 豪华型</h3>
+                      <p>2015年11月/2.00万公里</p>
+                      <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                      <p>
+                        <a href="#" class="subdued">10.80万</a>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="col col-50">
+                  <div class="list card">
+                    <div class="item item-body">
+                      <img class="full-image" src="res/img/car-img/1.4.jpg">
+                      <h3>江淮·瑞风M3 2015款 16L 豪华型</h3>
+                      <p>2015年11月/2.00万公里</p>
+                      <button class=" button button-outline button-positive button-small text-center">认证商家</button>
+                      <p>
+                        <a href="#" class="subdued">10.80万</a>
+                      </p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="box pink"><h1>PINK</h1></div>
+          </ion-slide>
+        </ion-slide-box>
+      </div>
+    </div>
+
+
+<button class="button button-positive ion-compose" ng-click="modal.show()">
+  <script id="templates/modal.html" type="text/ng-template">
+    <ion-modal-view>
+      <ion-content class="padding">
+        <h5>车型</h5>
+        <div class="row bg-row">
+          <div class="col col-33">
+            <div class="text-center car-style" ng-click="getKeywords()">
+              <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+              <p>不限</p>
+            </div>
+          </div>
+          <div class="col col-33">
+            <div class="text-center car-style" ng-click="getKeywords()">
+              <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+              <p>轿车</p>
+            </div>
+          </div>
+          <div class="col col-33">
+            <div class="text-center car-style" ng-click="getKeywords()">
+              <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+              <p>SUV</p>
+            </div>
+          </div>
+          </div>
+
+          <div class="row bg-row">
+            <div class="col col-33">
+              <div class="text-center car-style" ng-click="getKeywords()">
+                <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                <p>MPV</p>
+              </div>
+            </div>
+            <div class="col col-33">
+              <div class="text-center car-style" ng-click="getKeywords()">
+                <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                <p>跑车</p>
+              </div>
+            </div>
+            <div class="col col-33">
+              <div class="text-center car-style" ng-click="getKeywords()">
+                <img src="res/img/car-img/1.1.jpg" alt="nfd "/>
+                <p>商用车</p>
+              </div>
+            </div>
+          </div>
+      <!--选择城市-->
+        <div class="list list-inset">
+          <a class="item item-icon-right">
+            <p>选择城市</p>
+            <span class="badge">全国</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+
+
+          </div>
+        <div class="list">
+          <a class="item item-icon-right">
+            <p>车源类型</p>
+            <span class="badge">全部车源</span>
+            <i class="icon ion-ios-arrow-right"></i>
+          </a>
+        </div>
+
+        <div class="list" >
+          <div class="item ">
+            <p>车龄要求(单位：年)</p>
+            <div class="range range-positive">
+              <i class="icon ion-ios-sunny-outline"></i>
+              <input type="range" name="volume" min="0" max="8" value="4">
+              <i class="icon ion-ios-sunny"></i>
+            </div>
+          </div>
+            <div class="item ">
+              <p>里程要求(单位：万公里)</p>
+              <div class="range range-positive">
+                <i class="icon ion-ios-sunny-outline"></i>
+                <input type="range" name="volume" min="0" max="20" value="10">
+                <i class="icon ion-ios-sunny"></i>
+              </div>
+        </div>
+          </div>
+        <!--排放标准-->
+        <div class="list">
+          <div class="item">
+            <div class="row">
+              <div class="col col-33">
+                <div class=" ">不限</div>
+              </div>
+              <div class="col col-33">
+                <div class=" ">国II</div>
+              </div>
+              <div class="col col-33">
+                <div class=" ">国III</div>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col col-33">
+                <div class=" ">国IV</div>
+              </div>
+              <div class="col col-33">
+                <div class=" ">国V</div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="flex-box">
+          <sapn class=" ">为您找到0辆车</sapn>
+          <button class="button  button-assertive pull-left" ng-click="createContact(newUser)">查看</button>
+          <button class="button  background-assertive pull-left" ng-click="modal.hide()">重置</button>
+        </div>
+
+      </ion-content>
+    </ion-modal-view>
+  </script>
+  <script>
+  var app = angular.module('kaifanla', ['ionic']);
+
+  app.controller('sdivdeCtrl',['$scope','$ionicModal',function($scope, $ionicModal){
+   $scope.myActiveSdivde=1;
+    $scope.contacts = [
+      { name: 'Gordon Freeman' },
+      { name: 'Barney Calhoun' },
+      { name: 'Lamarr the Headcrab' }
+    ];
+
+    $ionicModal.fromTemplateUrl('templates/modal.html', {
+      scope: $scope
+    }).then(function(modal) {
+      $scope.modal = modal;
+    });
+
+    $scope.createContact = function(u) {
+      $scope.contacts.push({ name: u.firstName + ' ' + u.lastName });
+      $scope.modal.hide();
+    };
+  }])
+//          .controller('SlideController','$ionicModal', function($scope,$ionicModal) {
+//
+//            $scope.myActiveSlide = 1;
+//
+//
+//          })
+</script>
+</body>
+</html>
